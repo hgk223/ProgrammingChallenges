@@ -14,18 +14,21 @@ def combine():
     headers=[]
     files = sys.argv[1:] #get list of files to combine
     for file in files:
-        readFile=csv.reader(open(file, 'r'))
+        opened=open(file, 'r')
+        readFile=csv.reader(opened)
         line=readFile.__next__()
         for col in line:
             if col not in headers:
                 headers.append(col)
+        opened.close()
     #end loop
     headers.append("file_name")
     #now add the headers to the file
     outputWriter.writerow(headers)
     #now we have the headers for the csv files, and need to loop through the files to add to output
     for file in files:
-        readFile=csv.reader(open(file, 'r'))
+        opened=open(file, 'r')
+        readFile=csv.reader(opened)
         fileHeads=readFile.__next__() #get header line
         fileName = os.path.basename(file)
         for readLine in readFile:
@@ -42,7 +45,8 @@ def combine():
                         newLine.append('')
                 newLine.append(fileName)
                 outputWriter.writerow(newLine)
-            #exit if condition and loop    
+            #exit if condition and loop 
+        opened.close()   
     #end loop    
 
 #call main function
