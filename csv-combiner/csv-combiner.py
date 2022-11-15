@@ -37,13 +37,13 @@ def combine():
                 for x in range(len(headers)-1):
                     if headers[x] in fileHeads:
                         y=fileHeads.index(headers[x])
-                        newLine.append(readLine[x])
+                        newLine.append(readLine[y])
                     else:
                         newLine.append('')
                 newLine.append(fileName)
-                outputWriter.writerow(readLine)
+                outputWriter.writerow(newLine)
             #exit if condition and loop    
     #end loop    
 
-#call main function    
+#call main function
 combine()
